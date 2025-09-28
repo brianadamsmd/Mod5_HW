@@ -1,16 +1,34 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[14]:
-
-
-#Function used to answer the question and print the filtered list
 def filter_list(input_list, filter_num):
-    return [x for x in input_list if x <= filter_num]
+    """
+    Filters a list to keep only elements less than or equal to a given filter number/threshold.
+    
+    Uses the built-in 'filter' function with a lambda expression for efficient, 
+    one-line list filtering.
+    
+    Args:
+        input_list (list): The list of numbers to be filtered.
+        filter_num (int): The maximum value to retain in the list.
+    
+    Returns:
+        list: A new list containing the filtered elements.
+    """
+    return list(filter(lambda item: item <= filter_num, input_list))
 
-#Function used to parse the input of the list and create a list that can then be passed to the filter_list function
-#this function ensures that integers were entered
 def parse_list_input(input_str):
+    """
+    Parses a string input (e.g., "[1,2,3]" or "1,2,3") into a list of integers.
+
+    Performs validation to ensure all elements are valid integers.
+
+    Args:
+        input_str (str): The raw string input from the user.
+
+    Returns:
+        list: A list of integers.
+
+    Raises:
+        ValueError: If the input is empty or contains non-integer elements.
+    """
     try:
         # Remove brackets and split by commas
         input_str = input_str.strip().strip('[]')
@@ -23,7 +41,9 @@ def parse_list_input(input_str):
     except ValueError:
         raise ValueError("Please enter a valid list of integers (e.g., [1,2,3] or 1,2,3)")
 
-#I was unsure if the question intended for the user to input both the list and the filter. This try statement handles errors associated with inputting a list
+
+# I was unsure if the question intended for the user to input both the list and the filter. 
+# This try statement handles errors associated with inputting a list
 while True:
     try:
         input_str = input("Enter the list of integers (e.g., [1,2,3] or 1,2,3): ")
@@ -36,10 +56,17 @@ while True:
 #I wanted to make sure that an integer was input by the user, so I used a try statement
 while True:
     try:
+        
+        # Use float() first to safely catch all non-numeric inputs
         filter_num = float(input("Enter the filter value: "))
+        
+        # Check if the float value is actually an integer (no decimal part)
         if not filter_num.is_integer():
             raise ValueError("Filter number must be an integer")
+        
         filter_num = int(filter_num)
+
+        # Execute the core logic and print the result
         result = filter_list(input_list, filter_num)
         print(f"Filtered list (elements <= {filter_num}): {result}")
         break
