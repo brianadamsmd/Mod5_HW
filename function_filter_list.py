@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[14]:
-
 
 #Function used to answer the question and print the filtered list
 def filter_list(input_list, filter_num):
